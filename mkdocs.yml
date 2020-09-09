@@ -1,0 +1,63 @@
+site_name: Notes on Types and Programming Languages
+
+nav:
+    - Hub:
+        - Introduction: index.md
+    - Math Preliminaries:
+        - Home: math-preliminaries/index.md
+    - Resources:
+        - Type Systems and Logics: resources/type-systems-logics.md
+        - Rust: resources/rust.md
+    - References:
+        - references.md
+
+theme:
+    name: material
+    custom_dir: overrides
+    features:
+        - tabs
+    palette:
+        primary: light blue
+        accent: light blue
+        scheme: preference
+
+plugins:
+    - search:
+        lang: en
+
+markdown_extensions:
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
+    - attr_list
+    - pymdownx.highlight:
+        use_pygments: true
+        linenums: false
+    - pymdownx.inlinehilite
+    - pymdownx.keys
+    - pymdownx.superfences
+    - pymdownx.snippets
+    - pymdownx.tabbed
+    - footnotes
+    - pymdownx.critic
+    - pymdownx.betterem:
+        smart_enable: all
+    - pymdownx.caret
+    - pymdownx.mark
+    - pymdownx.tilde
+    - pymdownx.smartsymbols
+    - pymdownx.emoji:
+        emoji_index: !!python/name:materialx.emoji.twemoji
+        emoji_generator: !!python/name:materialx.emoji.to_svg
+    - def_list
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.arithmatex:
+        generic: true
+    - toc:
+        permalink: true
+
+extra_javascript:
+    - javascripts/config.js
+    - https://polyfill.io/v3/polyfill.min.js?features=es6
+    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
