@@ -6,7 +6,7 @@ Resources can include blogs, papers, programs and projects, etc. Resources are
 not grouped by topic, because a resource can span multiple topics and thus
 resources are instead labelled by multiple knowledge tags.
 
-:construction: **work in progerss** :construction:
+:construction: **work in progress** :construction:
 
 **What Type Soundness Theorem Do You Really Want to Prove?**
 :   Makes important distinction between *semantic* type soundness versus

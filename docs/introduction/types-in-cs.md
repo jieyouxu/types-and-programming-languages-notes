@@ -131,13 +131,15 @@ It is *insufficient* for type systems to be **sound** – these type systems typ
 be **efficient** so programmers don't have to suffer from long compile times, or in the case of
 dynamically type-checked languages, don't need to suffer from high run-time performance penalty.
 
-<p align="center">
+<figure>
     <img
         src="https://imgs.xkcd.com/comics/compiling.png"
         title="XKCD 303: Compiling"
         alt="XKCD 303: Compiling"
+        loading="lazy"
     />
-</p>
+    <figcaption>XKCD 303: Compiling</figcaption>
+</figure>
 
 ### Branches of the Study of Type Systems
 

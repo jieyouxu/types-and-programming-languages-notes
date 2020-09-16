@@ -257,13 +257,15 @@ try to perform optimizations.
 An example of this is the [V8 JavaScript engine] which does Just-In-Time (JIT) compilation of
 JavaScript code at run-time, which can accumlate run-time type information inductively.
 
-<center>
+<figure>
     <img
         src="https://imgs.xkcd.com/comics/optimization.png"
         title="XKCD 1691: Optimization"
         alt="XKCD 1691: Optimization"
+        loading="lazy"
     />
-</center>
+    <figcaption>XKCD 1691: Optimization</figcaption>
+</figure>
 
 ### Further Applications
 

@@ -1,10 +1,20 @@
 site_name: Notes on Types and Programming Languages
 
 nav:
-    - Hub:
-        - Introduction: index.md
+    - Home:
+        - index.md
+    - Introduction:
+        - Preface: introduction/preface.md
+        - Type Systems in Computer Science: introduction/types-in-cs.md
+        - Brief History: introduction/brief-history.md
+        - What Type Systems are Good For: introduction/type-systems-good-for.md
+        - Type Systems and Language Design: introduction/type-systems-language-design.md
     - Math Preliminaries:
         - Home: math-preliminaries/index.md
+        - Sets, Functions and Relations: math-preliminaries/sets-functions-relations/index.md
+        - Ordered Sets:
+            - Notes: math-preliminaries/ordered-sets/notes.md
+            - Exercises: math-preliminaries/ordered-sets/exercises.md
     - Resources:
         - Type Systems and Logics: resources/type-systems-logics.md
         - Rust: resources/rust.md
