@@ -1,8 +1,12 @@
 # Notes on Types and Programming Languages
 
-These notes mostly follow the *Types and Programming Languages*[^1] book
-by Bejamin C. Pierce, but may also contain additional remarks and may link to
-other external resources.
+These notes mostly follow the *Types and Programming Languages*[^1]
+[\[TaPL\]][TaPL] book by Bejamin C. Pierce, but may also contain additional
+remarks and may link to other external resources, including but not limited to:
+blog posts, conference talks, journal articles, papers, code, repositories, etc.
+
+When no inline citation is specified, assume the material is adapted from
+\[TaPL\].
 
 [Get the Types and Programming Languages book :book:][TaPL]{: .md-button }
 
