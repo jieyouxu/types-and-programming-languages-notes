@@ -155,9 +155,9 @@ Other examples of safety rules include (non-exhaustive):
 
 An important distinct to make is that
 
-\\[
+$$
 \text{language safety} \neq \text{static type safety}
-\\]
+$$
 
 Since language safety guarantees are typically enforced by both *static checks* (i.e. *syntactical
 soundness checks*) **and** *dynamic checks* (i.e. *semantic soundness checks*).
@@ -171,10 +171,11 @@ soundness checks*) **and** *dynamic checks* (i.e. *semantic soundness checks*).
 
 And so, we establish that
 
-\\[
-\text{language safety} = \text{syntactical soundness (static checks)}
-  \cup \text{semantic soundness (dynamic checks)}
-\\]
+$$
+\text{language safety} =
+    \text{syntactical soundness (static checks)}
+    \cup \text{semantic soundness (dynamic checks)}
+$$
 
 Even if these "safe" languages provide safe operations for which the language provides checks
 that guarantee the integrity of their abstractions, theese languages typically also provide
