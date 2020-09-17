@@ -1,0 +1,1042 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Exercises - Notes on Types and Programming Languages</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.6a5ad368.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#02a6f2">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="light-blue" data-md-color-accent="light-blue">
+  
+    
+      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exercises" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-announce">
+          <div class="md-announce__inner md-grid md-typeset">
+            
+    These notes are still under heavy development!
+
+          </div>
+        </aside>
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="Notes on Types and Programming Languages" class="md-header-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Notes on Types and Programming Languages
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Exercises
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../introduction/preface/" class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" class="md-tabs__link md-tabs__link--active">
+          Math Preliminaries
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../resources/type-systems-logics/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../references/" class="md-tabs__link">
+          References
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Notes on Types and Programming Languages" class="md-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Notes on Types and Programming Languages
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon"></span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Notes on Types and Programming Languages" class="md-nav__link">
+      Notes on Types and Programming Languages
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Introduction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../introduction/preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../introduction/types-in-cs/" title="Type Systems in Computer Science" class="md-nav__link">
+      Type Systems in Computer Science
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../introduction/brief-history/" title="Brief History" class="md-nav__link">
+      Brief History
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../introduction/type-systems-good-for/" title="What Type Systems are Good For" class="md-nav__link">
+      What Type Systems are Good For
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../introduction/type-systems-language-design/" title="Type Systems and Language Design" class="md-nav__link">
+      Type Systems and Language Design
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Math Preliminaries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Math Preliminaries" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Math Preliminaries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sets-functions-relations/" title="Sets, Functions and Relations" class="md-nav__link">
+      Sets, Functions and Relations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3" checked>
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Ordered Sets
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ordered Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Ordered Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../notes/" title="Notes" class="md-nav__link">
+      Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Exercises
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Exercises" class="md-nav__link md-nav__link--active">
+      Exercises
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#q1" class="md-nav__link">
+    Q1
+  </a>
+  
+    <nav class="md-nav" aria-label="Q1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theorem" class="md-nav__link">
+    Theorem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof" class="md-nav__link">
+    Proof
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theorem_1" class="md-nav__link">
+    Theorem
+  </a>
+  
+    <nav class="md-nav" aria-label="Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition-1" class="md-nav__link">
+    Definition 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definition-2" class="md-nav__link">
+    Definition 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof_1" class="md-nav__link">
+    Proof
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theorem_2" class="md-nav__link">
+    Theorem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof_2" class="md-nav__link">
+    Proof
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Resources
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Resources" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../resources/type-systems-logics/" title="Type Systems and Logics" class="md-nav__link">
+      Type Systems and Logics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../resources/rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      References
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="References" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../references/" title="References" class="md-nav__link">
+      References
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#q1" class="md-nav__link">
+    Q1
+  </a>
+  
+    <nav class="md-nav" aria-label="Q1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theorem" class="md-nav__link">
+    Theorem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof" class="md-nav__link">
+    Proof
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theorem_1" class="md-nav__link">
+    Theorem
+  </a>
+  
+    <nav class="md-nav" aria-label="Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition-1" class="md-nav__link">
+    Definition 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definition-2" class="md-nav__link">
+    Definition 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof_1" class="md-nav__link">
+    Proof
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theorem_2" class="md-nav__link">
+    Theorem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof_2" class="md-nav__link">
+    Proof
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h1>
+<h2 id="q1">Q1<a class="headerlink" href="#q1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Given relation <span class="arithmatex">\(R\)</span> on set <span class="arithmatex">\(S\)</span>; define relation <span class="arithmatex">\(R'\)</span> as</p>
+<div class="arithmatex">\[
+R' \triangleq R \cup \{ (s, s) \mid s \in S \}
+\]</div>
+<p>That is, <span class="arithmatex">\(R'\)</span> contains all pairs in <span class="arithmatex">\(R\)</span> plus all pairs of the form
+<span class="arithmatex">\((s, s)\)</span>. Show <span class="arithmatex">\(R'\)</span> is reflexive closure of <span class="arithmatex">\(R\)</span>.</p>
+</blockquote>
+<p>Let <span class="arithmatex">\(\Delta_S \triangleq \{ (s, s) \mid s \in S \}\)</span> be the <strong>diagonal relation</strong>
+on <span class="arithmatex">\(S\)</span>, so that</p>
+<div class="arithmatex">\[
+R' \equiv R \cup \Delta_S
+\]</div>
+<details class="info"><summary>Diagonal Relation</summary><p>Let <span class="arithmatex">\(S\)</span> be a set, then the <strong>diagonal relation</strong> on <span class="arithmatex">\(S\)</span>, <span class="arithmatex">\(\Delta_S\)</span>, is
+defined as</p>
+<div class="arithmatex">\[
+\Delta_S \triangleq \{ (x, x) \mid x \in S \} \subseteq S \times S
+\]</div>
+</details>
+<ol>
+<li>
+<p>At most one <em>relation</em> on <span class="arithmatex">\(S\)</span> can be the <strong>smallest reflexive superset</strong> of
+   <span class="arithmatex">\(R\)</span>, by <strong>Smallest Element is Unique</strong> theorem.</p>
+<details class="info"><summary>Smallest Element is Unique</summary><h3 id="theorem">Theorem<a class="headerlink" href="#theorem" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Let <span class="arithmatex">\((S, \leq)\)</span> be an <strong>partially ordered</strong> set.</li>
+<li>If <span class="arithmatex">\(S\)</span> has a <em>smallest</em> element, then there can only be one (<strong>unique
+  smallest element</strong>).</li>
+</ul>
+<h3 id="proof">Proof<a class="headerlink" href="#proof" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(a, b \in S\)</span> and both be smallest element of <span class="arithmatex">\(S\)</span> and, since we have
+the partial order <span class="arithmatex">\(\leq\)</span> (let's call it relation <span class="arithmatex">\(R\)</span> instead).</p>
+<p>Recall that partial order gives us <strong>antisymmetry</strong>:</p>
+<div class="arithmatex">\[
+\forall x, y \in S \colon (x, y) \in R \land (y, x) \in R \to x = y
+\]</div>
+<div class="arithmatex">\[
+\begin{prooftree}
+    \AxiomC{$\forall x, y \in S \colon (x, y) \in R
+        \land (y, x) \in R \to x = y$}
+    \AxiomC{$\forall y \in S \colon a \leq y$}
+    \AxiomC{$\forall y \in S \colon b \leq y$}
+    \BinaryInfC{$a \leq b \land b \leq a$}
+    \BinaryInfC{$a = b$}
+\end{prooftree}
+\]</div>
+</details>
+</li>
+<li>
+<p><span class="arithmatex">\(R'\)</span> is a <strong>reflexive relation</strong> containing <span class="arithmatex">\(R\)</span>, from</p>
+<div class="arithmatex">\[
+\begin{prooftree}
+    \AxiomC{$R' = R \cup \Delta_S$}
+    \UnaryInfC{$R \subseteq R' \land \Delta_S \subseteq R'$}
+\end{prooftree}
+\]</div>
+<p>We have <span class="arithmatex">\(R'\)</span> is <strong>reflexive</strong> by <strong>Relation Contains Diagonal Relation</strong>
+theorem.</p>
+<details class="info"><summary>Relation Contains Diagonal Relation iff Reflexive</summary><h3 id="theorem_1">Theorem<a class="headerlink" href="#theorem_1" title="Permanent link">&para;</a></h3>
+<p>We have two equivalent definitions of a <strong>reflexive relation</strong>.</p>
+<h4 id="definition-1">Definition 1<a class="headerlink" href="#definition-1" title="Permanent link">&para;</a></h4>
+<p><span class="arithmatex">\(R\)</span> is <strong>reflexive</strong> iff:</p>
+<div class="arithmatex">\[
+\forall x \in S \colon (x, x) \in R
+\]</div>
+<h4 id="definition-2">Definition 2<a class="headerlink" href="#definition-2" title="Permanent link">&para;</a></h4>
+<p><span class="arithmatex">\(R\)</span> is <strong>reflexive</strong> iff it is a <em>superset</em> of the
+<strong>diagonal relation</strong>:</p>
+<div class="arithmatex">\[
+\Delta_S \subseteq R
+\]</div>
+<h3 id="proof_1">Proof<a class="headerlink" href="#proof_1" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(D_1\)</span> denote definition 1 and <span class="arithmatex">\(D_2\)</span> denote definition 2.</p>
+<p><strong>Definition 1 <span class="arithmatex">\(\implies\)</span> Definition 2</strong>:</p>
+<p>Proof by contraposition. Required to prove that</p>
+<div class="arithmatex">\[
+\Delta_s \not\subseteq R \to \exists x \in S \colon
+    (x, x) \not\in R
+\]</div>
+<p>Suppose that <span class="arithmatex">\(\Delta_s \not\subseteq R\)</span>.</p>
+<div class="arithmatex">\[
+\begin{prooftree}
+    \AxiomC{$\Delta_S \not\subseteq R$}
+    \RightLabel{(diagonal relation defn.)}
+    \UnaryInfC{$\exists (x, x) \in S \times S \colon (x, x) \not\in R$}
+    \UnaryInfC{$\exists x \in S \colon (x, x) \not\in S$}
+    \RightLabel{(transposition)}
+    \UnaryInfC{$\forall x \in S \colon (x, x) \in R$}
+    \UnaryInfC{$\Delta_S \subseteq R$}
+\end{prooftree}
+\]</div>
+<p><strong>Definition 2 <span class="arithmatex">\(\implies\)</span> Definition 1</strong>:</p>
+<p>Let <span class="arithmatex">\(R\)</span> be the relation that fulfills condition that
+<span class="arithmatex">\(\Delta_S \subseteq R\)</span>.</p>
+<div class="arithmatex">\[
+\begin{prooftree}
+    \AxiomC{$\Delta_S \subseteq R$}
+    \RightLabel{(diagonal relation defn.)}
+    \UnaryInfC{$\forall x \in S \colon (x, x) \in \Delta_S$}
+    \RightLabel{(subset)}
+    \UnaryInfC{$\forall x \in S \colon (x, x) \in R$}
+\end{prooftree}
+\]</div>
+<p>Which demonstrates that <span class="arithmatex">\(R\)</span> is in fact <strong>reflexive</strong> by definition 1.</p>
+<hr />
+<p>And so the two definitions are <em>equivalent</em>.</p>
+<div class="arithmatex">\[
+\begin{prooftree}
+    \AxiomC{$D_1 \to D_2$}
+    \AxiomC{$D_2 \to D_1$}
+    \BinaryInfC{$D_1 \leftrightarrow D_2$}
+\end{prooftree}
+\]</div>
+</details>
+<p>This means that <span class="arithmatex">\(R'\)</span> is a <strong>reflexive relation containing <span class="arithmatex">\(R\)</span></strong>.</p>
+</li>
+<li>
+<p><strong>Every</strong> reflexive relation containing <span class="arithmatex">\(R\)</span> must trivially also contain
+   <span class="arithmatex">\(\Delta_S\)</span>, by the <strong>Relation Containing Diagonal Relation iff Reflexive</strong>
+   theorem.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(R'\)</span> is the <strong>smallest reflexive relation</strong> on <span class="arithmatex">\(S\)</span> that contains <span class="arithmatex">\(R\)</span> by
+   the <strong>Union is Smallest Superset</strong> theorem.</p>
+<details class="info"><summary>Union is Smallest Superset</summary><h3 id="theorem_2">Theorem<a class="headerlink" href="#theorem_2" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(S_1, S_2\)</span> be two sets. Then <span class="arithmatex">\(S_1 \cup S_2\)</span> is the <strong>smallest set</strong>
+containing both <span class="arithmatex">\(S_1\)</span> and <span class="arithmatex">\(S_2\)</span>. So for any set <span class="arithmatex">\(T\)</span>:</p>
+<div class="arithmatex">\[
+(S_1 \subseteq T) \land (S_2 \subseteq T) \leftrightarrow
+    (S_1 \cup S_2) \subseteq T
+\]</div>
+<h3 id="proof_2">Proof<a class="headerlink" href="#proof_2" title="Permanent link">&para;</a></h3>
+<p>Prove by <span class="arithmatex">\(A \to B \land B \to A \iff A \leftrightarrow B\)</span>:</p>
+<p><strong>Condition 1</strong>: <span class="arithmatex">\((S_1 \subseteq T) \land (S_2 \subseteq T) \to
+(S_1 \cup S_2) \subseteq T\)</span>:</p>
+<div class="arithmatex">\[
+\begin{prooftree}
+    \AxiomC{$(S_1 \subseteq T) \land (S_2 \subseteq T)$}
+    \RightLabel{(union preserves subsets)}
+    \UnaryInfC{$(S_1 \cup S_2) \subseteq (T \cup T)$}
+    \RightLabel{(union idempotence)}
+    \UnaryInfC{$(S_1 \cup S_2) \subseteq T$}
+\end{prooftree}
+\]</div>
+<p><strong>Condition 2</strong>: <span class="arithmatex">\((S_1 \cup S_2) \subseteq T \to
+   (S_1 \subseteq T) \land (S_2 \subseteq T)\)</span>:</p>
+<p>Assume <span class="arithmatex">\((S_1 \cup S_2) \subseteq T\)</span>.</p>
+<div class="arithmatex">\[
+\begin{prooftree}
+    \AxiomC{$S_1 \subseteq (S_1 \cup S_2)$}
+    \UnaryInfC{$(S_1 \cup S_2) \subseteq T$}
+    \UnaryInfC{$S_1 \subseteq T$}
+    \AxiomC{$S_2 \subseteq (S_1 \cup S_2)$}
+    \UnaryInfC{$(S_1 \cup S_2) \subseteq T$}
+    \UnaryInfC{$S_2 \subseteq T$}
+    \BinaryInfC{$(S_1 \cup S_2) \subseteq T$}
+    \UnaryInfC{$(S_1 \subseteq T) \land (S_2 \subseteq T)$}
+\end{prooftree}
+\]</div>
+<p>So, by <strong>equivalence</strong>, we have</p>
+<div class="arithmatex">\[
+\begin{prooftree}
+    \AxiomC{$(S_1 \subseteq T) \land (S_2 \subseteq T) \to
+        (S_1 \cup S_2) \subseteq T$}
+    \AxiomC{$(S_1 \cup S_2) \subseteq T \to
+        (S_1 \subseteq T) \land (S_2 \subseteq T)$}
+    \BinaryInfC{$(S_1 \subseteq T) \land (S_2 \subseteq T)
+        \leftrightarrow (S_1 \cup S_2) \subseteq T$}
+\end{prooftree}
+\]</div>
+</details>
+</li>
+</ol>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../notes/" title="Notes" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Notes
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../../resources/type-systems-logics/" title="Type Systems and Logics" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Type Systems and Logics
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

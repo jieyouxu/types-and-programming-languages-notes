@@ -1,0 +1,1057 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>What Type Systems are Good For - Notes on Types and Programming Languages</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.6a5ad368.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#02a6f2">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="light-blue" data-md-color-accent="light-blue">
+  
+    
+      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#what-are-type-systems-good-for" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-announce">
+          <div class="md-announce__inner md-grid md-typeset">
+            
+    These notes are still under heavy development!
+
+          </div>
+        </aside>
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-header-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Notes on Types and Programming Languages
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              What Type Systems are Good For
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../math-preliminaries/" class="md-tabs__link">
+          Math Preliminaries
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/type-systems-logics/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../references/" class="md-tabs__link">
+          References
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Notes on Types and Programming Languages
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon"></span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-nav__link">
+      Notes on Types and Programming Languages
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Introduction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../types-in-cs/" title="Type Systems in Computer Science" class="md-nav__link">
+      Type Systems in Computer Science
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../brief-history/" title="Brief History" class="md-nav__link">
+      Brief History
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        What Type Systems are Good For
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="What Type Systems are Good For" class="md-nav__link md-nav__link--active">
+      What Type Systems are Good For
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-type-systems-good-for" class="md-nav__link">
+    What are Type Systems Good For?
+  </a>
+  
+    <nav class="md-nav" aria-label="What are Type Systems Good For?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-detection" class="md-nav__link">
+    Error Detection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abstraction" class="md-nav__link">
+    Abstraction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-safety" class="md-nav__link">
+    Language Safety
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efficiency" class="md-nav__link">
+    Efficiency
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#further-applications" class="md-nav__link">
+    Further Applications
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../type-systems-language-design/" title="Type Systems and Language Design" class="md-nav__link">
+      Type Systems and Language Design
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Math Preliminaries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Math Preliminaries" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Math Preliminaries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/sets-functions-relations/" title="Sets, Functions and Relations" class="md-nav__link">
+      Sets, Functions and Relations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Ordered Sets
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ordered Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Ordered Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/ordered-sets/notes/" title="Notes" class="md-nav__link">
+      Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/ordered-sets/exercises/" title="Exercises" class="md-nav__link">
+      Exercises
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Resources
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Resources" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/type-systems-logics/" title="Type Systems and Logics" class="md-nav__link">
+      Type Systems and Logics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      References
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="References" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/" title="References" class="md-nav__link">
+      References
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-type-systems-good-for" class="md-nav__link">
+    What are Type Systems Good For?
+  </a>
+  
+    <nav class="md-nav" aria-label="What are Type Systems Good For?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-detection" class="md-nav__link">
+    Error Detection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abstraction" class="md-nav__link">
+    Abstraction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-safety" class="md-nav__link">
+    Language Safety
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efficiency" class="md-nav__link">
+    Efficiency
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#further-applications" class="md-nav__link">
+    Further Applications
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>What Type Systems are Good For</h1>
+                
+                <h2 id="what-are-type-systems-good-for">What are Type Systems Good For?<a class="headerlink" href="#what-are-type-systems-good-for" title="Permanent link">&para;</a></h2>
+<h3 id="error-detection">Error Detection<a class="headerlink" href="#error-detection" title="Permanent link">&para;</a></h3>
+<p>Static type checking systems can detect and thus catch certain errors early, at compile-time.</p>
+<p>How much of such errors that can be caught by the type checking system depends on the type system's
+<em>expressiveness</em>. A <em>more expressive</em> type system typically allows the programmer to encode more
+information about data types and operations defined w.r.t. to those data types, which the type
+system can use these encoded information to check for certain errors.</p>
+<ul>
+<li>Languages which support <em>dependent typing</em> can express array bounds checks by encoding an array
+  or vector's length in the types, so that bounds checking can be eliminated at run-time because
+  the static type system can prove the absence of certain out-of-bounds access at compile-time.</li>
+</ul>
+<p>An <a href="https://www.idris-lang.org/pages/example.html">example in Idris</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Natural numbers: base case 0, or inductively define as successors of 0.</span>
+<span class="c1">-- e.g. 1 == S Z, 2 == S (S Z), and so on for all natural numbers.</span>
+<span class="kr">data</span> <span class="kt">Nat</span> <span class="ow">=</span> <span class="kt">Z</span> <span class="o">|</span> <span class="kt">S</span> <span class="kt">Nat</span>
+
+<span class="c1">-- A vector is also inductively defined; it is either an empty list `Nil`, or elements appended</span>
+<span class="c1">-- to the empty list via `(::)`. Notice that the vector&#39;s length is encoded in its type,</span>
+<span class="c1">-- specifically with it&#39;s `Nat` type in `Vector k a`, which is parametric over both its length `k`</span>
+<span class="c1">-- and element type `a`.</span>
+<span class="kr">data</span> <span class="kt">Vector</span> <span class="kt">:</span> <span class="kt">Nat</span> <span class="ow">-&gt;</span> <span class="kt">Type</span> <span class="ow">-&gt;</span> <span class="kt">Type</span> <span class="kr">where</span>
+    <span class="kt">Nil</span>  <span class="kt">:</span> <span class="kt">Vector</span> <span class="kt">Z</span> <span class="n">a</span>
+    <span class="p">(</span><span class="ow">::</span><span class="p">)</span> <span class="kt">:</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Vector</span> <span class="n">k</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Vector</span> <span class="p">(</span><span class="kt">S</span> <span class="n">k</span><span class="p">)</span> <span class="n">a</span>
+
+<span class="c1">-- When two vectors are concatenated, the length of the resulting vector `r` is the sum of the</span>
+<span class="c1">-- lengths of the two input vectors `n` and `m` respectively.</span>
+<span class="c1">-- This invariant is encoded at the type level by the type-level expression `(n + m)`.</span>
+<span class="nf">concat</span> <span class="kt">:</span> <span class="kt">Vector</span> <span class="n">n</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Vector</span> <span class="n">m</span> <span class="n">a</span> <span class="ow">-&gt;</span> <span class="kt">Vector</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span><span class="p">)</span> <span class="n">a</span>
+<span class="nf">concat</span> <span class="kt">Nil</span>       <span class="n">ys</span> <span class="ow">=</span> <span class="n">ys</span>
+<span class="nf">concat</span> <span class="p">(</span><span class="n">x</span> <span class="ow">::</span> <span class="n">xs</span><span class="p">)</span> <span class="n">ys</span> <span class="ow">=</span> <span class="n">x</span> <span class="ow">::</span> <span class="n">app</span> <span class="n">xs</span> <span class="n">ys</span>
+</code></pre></div>
+
+<p>An expressive type system can also serve as a valuable <em>maintenance tool</em>, in that refactoring
+code can be made relatively painless by revealing which sites still have inconsistent typing.</p>
+<h3 id="abstraction">Abstraction<a class="headerlink" href="#abstraction" title="Permanent link">&para;</a></h3>
+<p>Type systems can typically be used to enforce <em>modularity</em> in larger software projects that allows
+the programmer to enforce <em>structure</em> as well as how public APIs can be used, subject to
+<em>visibility</em> and <em>accessibility</em>.</p>
+<p>The API surface of a module then typically becomes the <em>type of the module</em> – a well-defined
+contract between the provider and its users.</p>
+<p>Then, the possibility of hiding-away implementation details facilitates <strong>abstraction</strong>, to allow
+dependency on well-defined interfaces instead of possibily constantly-changing implementation
+details.</p>
+<h3 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h3>
+<p>Types typically also serve to be useful when trying to read programs. Consider the following two
+snippets, written in JavaScript and TypeScript, respectively.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span>: <span class="kt">number</span><span class="p">,</span> <span class="nx">b</span>: <span class="kt">number</span><span class="p">)</span><span class="o">:</span> <span class="kt">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>In the JavaScript version, we have no guarantee that we can even add <code>a</code> and <code>b</code> together, needless
+to say what the results of the addition is. We might produce a <code>string</code> as the result of adding
+<code>"a" + "b"</code>, when we might expect a <code>number</code> as the result. We don't really know what it is doing –
+what argument it takes, and what return value it yields.</p>
+<p>In languages with stronger static type systems, we can often encode the possibility of missing
+return values, and possible failure with types too (versus possibility of forgetting <code>null</code> checks):</p>
+<p>For example, in Rust, there is a [<code>checked_add</code>] function defined for all primitive integer types
+which explicitly requires the user to account for the possibility of addition overflow.</p>
+<div class="highlight"><pre><span></span><code><span class="n">assert</span><span class="o">!</span><span class="p">(</span><span class="mi">1</span><span class="k">u8</span><span class="p">.</span><span class="n">checked_add</span><span class="p">(</span><span class="kt">u8</span>::<span class="n">MAX</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+
+<p>These types are able to encode valuable information that we can use to supplement our documentation
+so that not only are certain conditions documented, but that they are also statically checked
+and verified by our compilers.</p>
+<p>In Haskell and other programming languages that can guarantee <em>purity</em>, when effects are needed
+they are typically encoded in the types too.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- We can guarantee purity here – no external state will be modified.</span>
+<span class="nf">add</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
+
+<span class="c1">-- We can explicitly see that we are doing I/O as side effects in the type signature,</span>
+<span class="nf">add_with_logging</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">IO</span> <span class="kt">Int</span>
+</code></pre></div>
+
+<p>Such types are also invaluable when it comes to guaranteeing public API stability and detecting
+breaking changes, especially when many libraries and projects today use <a href="https://semver.org/">semver</a> for versioning
+and stability indication.</p>
+<h3 id="language-safety">Language Safety<a class="headerlink" href="#language-safety" title="Permanent link">&para;</a></h3>
+<p>What consitutes "<em>safety</em>" within a programming language is subject to what the language itself
+defines as its guaranteed "<em>safety</em>". Typically, it constitutes as what you <em>cannot</em> do to harm
+yourself in a particular language.</p>
+<blockquote>
+<p>A language's provided <strong>safety</strong> guarantees are guarantees that the language will protect its own
+<em>abstractions</em>.</p>
+</blockquote>
+<p>An example of this may be trying to write to a sequential buffer. A "memory-safe" language such as
+Rust may provide safe APIs that prevents the programmer from writing out-of-bounds memory, or else
+the program explicitly crashes or <a href="https://doc.rust-lang.org/std/macro.panic.html"><em>panics</em></a> to prevent illegal access. We say that Rust protects
+its abstraction of memory safety by <a href="https://doc.rust-lang.org/alloc/vec/struct.Vec.html#indexing">explicitly enforcing bounds check for read and write access</a> to
+such arrays/slices.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="o">!</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">];</span><span class="w"></span>
+<span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span><span class="w"> </span><span class="c1">// it will panic!</span>
+<span class="c1">// alternatively, use the `get` or `get_mut` methods to explicitly handle potential failure:</span>
+<span class="k">match</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">unreachable</span><span class="o">!</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nb">None</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;index out-of-bounds&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Contrast this with C, where memory-safety is not guaranteed by the language and the responsibility
+of ensuring in-bounds memory access is delegated to the programmer – i.e. out-of-bounds memory
+access is <strong>undefined behaviour</strong> and behaviour is subject to the particular compiler, optimization
+level, memory model and underlying operating system (if there is an OS!). Ideally, the OS would
+terminate the process if it detects illegal memory access through <a href="https://en.wikipedia.org/wiki/Virtual_memory"><em>paged virtual memory</em></a>, but this
+is not guaranteed. On embedded systems where you <em>don't have an OS</em>, this probably results in
+corrupted memory – the hardware is totally free to summon demons!</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// WARNING: undefined behaviour – here be dragons!</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">};</span>
+    <span class="c1">// this *could* segfault, could print garbage, could summon a dragon.</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;x[6] = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Other examples of safety rules include (non-exhaustive):</p>
+<ul>
+<li>Lexical scoping</li>
+<li>Guarantess on call stack</li>
+<li>Aliasing XOR mutation (e.g. Rust's <a href="https://doc.rust-lang.org/rust-by-example/scope/borrow.html">ownership and borrowing rules</a> encoded by <code>&amp;</code> and <code>&amp;mut</code>
+  statically, or [<code>Borrow</code>] and [<code>BorrowMut</code>] dynamically, as well as other types and constructs)</li>
+</ul>
+<p>An important distinct to make is that</p>
+<div class="arithmatex">\[
+\text{language safety} \neq \text{static type safety}
+\]</div>
+<p>Since language safety guarantees are typically enforced by both <em>static checks</em> (i.e. <em>syntactical
+soundness checks</em>) <strong>and</strong> <em>dynamic checks</em> (i.e. <em>semantic soundness checks</em>).</p>
+<ul>
+<li>An example of this is Rust's [<code>assert!</code>] checks, for which</li>
+</ul>
+<blockquote>
+<p>unsafe code relies on <code>assert!</code> to enforce run-time invariants that, if violated could lead to
+unsafety.</p>
+<p>— excerpt from [<code>std::assert</code> documentation]</p>
+</blockquote>
+<p>And so, we establish that</p>
+<div class="arithmatex">\[
+\text{language safety} =
+    \text{syntactical soundness (static checks)}
+    \cup \text{semantic soundness (dynamic checks)}
+\]</div>
+<p>Even if these "safe" languages provide safe operations for which the language provides checks
+that guarantee the integrity of their abstractions, theese languages typically also provide
+facilities for bypassing these checks – either for performance reasons, or because there may be
+perfectly sound programs that are rejected by the type system which is purposefully conservative
+to preserve soundness.</p>
+<p>An example of this is the <code>unsafe</code> "escape hatch" provided by Rust – the programmer is allowed
+to bypass bounds checks, for example, but the responsibility of ensuring that the resulting program
+is semantically sound is up to the programmer.</p>
+<p>The vector <code>Vec</code> type provides an <strong>unsafe</strong> [<code>set_len</code>] method which forces the length of the
+vector to be a programmer-specified length. The language now does not do safety checks at run-time,
+but instead the responsibility of checking the required safety conditions are delegated to the
+programmer. That is, ensuring that</p>
+<blockquote>
+<ul>
+<li>The <code>new_len</code> <strong>must</strong> be less than or equal to <code>capacity()</code>.</li>
+<li>The elements at <code>old_len..new_len</code> <strong>must</strong> be initialized.</li>
+</ul>
+<p>– excerpt from [<code>set_len</code> safety conditions]</p>
+</blockquote>
+<p>are now the responsibilities of the programmer. A [<code>debug_assert!</code>] is used in the implementation
+to do checks in debug builds, but such assertions are optimized out for release builds.</p>
+<p>In fact, an important reason as to why <code>unsafe</code> "escape hatches" are required even in "safe"
+languages is for <a href="https://en.wikipedia.org/wiki/Foreign_function_interface">Foreign Function Interfacing (FFI)</a>. When a safe language calls over to another
+language (irrespective of whether the other language is safe or unsafe), they almost certainly
+will have <em>different safety guarantees</em> for which the <strong>safety guarantees may not be preserved over
+FFI boundaries</strong>.</p>
+<p><a href="https://dl.acm.org/doi/book/10.5555/547964">Cardelli (1996)</a> provides another perspective of language safety: a language can be considered
+safe when run-time errors are "<em>trapped</em>", which causes the program to halt execution immediately
+(or via exceptions), while "<em>untrapped</em>" programs may allow execution to proceed – then a "safe"
+language in this perspective is one that <strong>prevents untrapped errors at run-time</strong>.</p>
+<p>Safety guarantees typically also have impacts on portability – when there are no safety guarantees
+for certain operations, and that the definition of the language leaves out what to do, then such
+behaviour is <em>unspecified</em> – aka "<strong>Undefined Behaviour (UB)</strong>". The compiler is typically free
+to do whatever it wishes when it encounters such UB, and typically UB behaves <em>differently</em> in
+different architectures and OS versions. In constrast, a well-typed program will produce identical
+results (up to allowed differences such as floating-point precision) under "correct"
+implementations.</p>
+<h3 id="efficiency">Efficiency<a class="headerlink" href="#efficiency" title="Permanent link">&para;</a></h3>
+<p>Types provide <em>additional information</em> for the compilers w.r.t. to machine instruction selection
+as well as what optimizations are <em>safe</em> to perform.</p>
+<p>In safe languages that have a rich static type system, certain dynamic checks (e.g. bounds check)
+can be eliminated because there is sufficient type information that the compiler can use to
+<em>statically prove</em> that no out-of-bounds access can possibly occur.</p>
+<p>An example in Rust (compile this in Godbolt, try <code>O3</code> versus turning off optimization, where
+panicking branches are not eliminated). Godbolt link: <a href="https://godbolt.org/z/EM6cTQ">https://godbolt.org/z/EM6cTQ</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// by construction and type annotation, we know that `v` is an integer array consisting of exactly</span>
+<span class="w">  </span><span class="c1">// 3 `u8` elements.</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">v</span>: <span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// by induction on this for-loop, we know that `i` can ever take a value in the inclusive range</span>
+<span class="w">  </span><span class="c1">// [0, 2].</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="n">v</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// the compiler has sufficient information to prove that the `v[i]` access *cannot* be</span>
+<span class="w">    </span><span class="c1">// out-of-bounds, so we don&#39;t need to generate `panic` branches for potential out-of-bounds</span>
+<span class="w">    </span><span class="c1">// array index access.</span>
+<span class="w">    </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;sum = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Even compilers and interpreters for languages such as JavaScript which heavily relies on dynamic
+duck-typing and doesn't have a rich type system try <em>hard</em> to deduce and infer type information to
+try to perform optimizations.</p>
+<p>An example of this is the <a href="https://en.wikipedia.org/wiki/V8_(JavaScript_engine)">V8 JavaScript engine</a> which does Just-In-Time (JIT) compilation of
+JavaScript code at run-time, which can accumlate run-time type information inductively.</p>
+<figure>
+    <img
+        src="https://imgs.xkcd.com/comics/optimization.png"
+        title="XKCD 1691: Optimization"
+        alt="XKCD 1691: Optimization"
+        loading="lazy"
+    />
+    <figcaption>XKCD 1691: Optimization</figcaption>
+</figure>
+
+<h3 id="further-applications">Further Applications<a class="headerlink" href="#further-applications" title="Permanent link">&para;</a></h3>
+<p>Type systems can also help to enforce <em>security</em>. For example, there are research languages which
+attempt to <a href="http://people.csail.mit.edu/polikarn/publications/lifty.pdf">encode security syntactically by annotating the flow of information</a>.</p>
+<p>Type systems can also be used to define templates for serialization/deserialization <em>automatically</em>
+through code-gen, provided sufficient type information is available. A great example of this is
+provided by the [<code>serde</code>] library in Rust – the programmer can simply define a <code>struct</code> or <code>enum</code>,
+and have the library derive the relevent serialization/deserialization through macros.</p>
+<p>Type systems (albeit very powerful ones) can be used for <em>automatic theorem proving</em>. Examples
+of this include <a href="https://coq.inria.fr/">Coq</a> or <a href="https://github.com/agda/agda">Agda</a>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../brief-history/" title="Brief History" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Brief History
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../type-systems-language-design/" title="Type Systems and Language Design" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Type Systems and Language Design
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

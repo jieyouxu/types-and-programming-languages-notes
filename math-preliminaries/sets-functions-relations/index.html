@@ -1,0 +1,938 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Sets, Functions and Relations - Notes on Types and Programming Languages</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.6a5ad368.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#02a6f2">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="light-blue" data-md-color-accent="light-blue">
+  
+    
+      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sets-relations-and-functions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-announce">
+          <div class="md-announce__inner md-grid md-typeset">
+            
+    These notes are still under heavy development!
+
+          </div>
+        </aside>
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-header-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Notes on Types and Programming Languages
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Sets, Functions and Relations
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../introduction/preface/" class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../" class="md-tabs__link md-tabs__link--active">
+          Math Preliminaries
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/type-systems-logics/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../references/" class="md-tabs__link">
+          References
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Notes on Types and Programming Languages
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon"></span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-nav__link">
+      Notes on Types and Programming Languages
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Introduction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/types-in-cs/" title="Type Systems in Computer Science" class="md-nav__link">
+      Type Systems in Computer Science
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/brief-history/" title="Brief History" class="md-nav__link">
+      Brief History
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/type-systems-good-for/" title="What Type Systems are Good For" class="md-nav__link">
+      What Type Systems are Good For
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/type-systems-language-design/" title="Type Systems and Language Design" class="md-nav__link">
+      Type Systems and Language Design
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Math Preliminaries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Math Preliminaries" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Math Preliminaries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Sets, Functions and Relations
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Sets, Functions and Relations" class="md-nav__link md-nav__link--active">
+      Sets, Functions and Relations
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sets" class="md-nav__link">
+    Sets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natural-numbers" class="md-nav__link">
+    Natural numbers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#n-place-relation" class="md-nav__link">
+    n-place relation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#domain-and-range" class="md-nav__link">
+    Domain and range
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partial-function-and-total-function" class="md-nav__link">
+    Partial function and total function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defined-and-undefined" class="md-nav__link">
+    Defined and undefined
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perservance-of-predicate" class="md-nav__link">
+    Perservance of predicate
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Ordered Sets
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ordered Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Ordered Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ordered-sets/notes/" title="Notes" class="md-nav__link">
+      Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ordered-sets/exercises/" title="Exercises" class="md-nav__link">
+      Exercises
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Resources
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Resources" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/type-systems-logics/" title="Type Systems and Logics" class="md-nav__link">
+      Type Systems and Logics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      References
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="References" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/" title="References" class="md-nav__link">
+      References
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sets" class="md-nav__link">
+    Sets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natural-numbers" class="md-nav__link">
+    Natural numbers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#n-place-relation" class="md-nav__link">
+    n-place relation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#domain-and-range" class="md-nav__link">
+    Domain and range
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partial-function-and-total-function" class="md-nav__link">
+    Partial function and total function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defined-and-undefined" class="md-nav__link">
+    Defined and undefined
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perservance-of-predicate" class="md-nav__link">
+    Perservance of predicate
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="sets-relations-and-functions">Sets, Relations and Functions<a class="headerlink" href="#sets-relations-and-functions" title="Permanent link">&para;</a></h1>
+<h2 id="sets">Sets<a class="headerlink" href="#sets" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Curly braces to list the <strong>elements</strong> a set explicitly: <span class="arithmatex">\(\{\dots\}\)</span></li>
+<li>Set comprehension by construction: <span class="arithmatex">\(\{ x \in S \mid \dots \}\)</span></li>
+<li>Empty set: <span class="arithmatex">\(\varnothing\)</span></li>
+<li>Set difference of <span class="arithmatex">\(S\)</span> and <span class="arithmatex">\(T\)</span>: <span class="arithmatex">\(S \setminus T\)</span></li>
+<li>Cardinality of set <span class="arithmatex">\(S\)</span>: <span class="arithmatex">\(\lvert S \rvert\)</span></li>
+<li>Powerset of set <span class="arithmatex">\(S\)</span>: <span class="arithmatex">\(\mathcal{P}(S)\)</span></li>
+</ul>
+<h2 id="natural-numbers">Natural numbers<a class="headerlink" href="#natural-numbers" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Set of natural numbers denoted by <span class="arithmatex">\(\mathbb{N} = \{ 0, 1, \dots \}\)</span></li>
+<li>A set is <strong>countable</strong> iff its elements can form an injective mapping into
+  the elements of the natural numbers.</li>
+<li>A set is <strong>countably infinite</strong> iff its elements can form a bijection to the
+  elements of the natural numbers.</li>
+</ul>
+<h2 id="n-place-relation">n-place relation<a class="headerlink" href="#n-place-relation" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>An <strong><span class="arithmatex">\(n\)</span>-place relation</strong> on the collection of sets
+  <span class="arithmatex">\(S_1, \dots, S_n\)</span> is a set of tuples
+  <span class="arithmatex">\(R \subseteq S_1 \times \cdots \times S_n\)</span> of elements from each of the
+  <span class="arithmatex">\(S_i\)</span> sets.</p>
+<ul>
+<li>The elements <span class="arithmatex">\(s_1 \in S_1\)</span> to <span class="arithmatex">\(s_n \in S_n\)</span> are <em>related by
+  <span class="arithmatex">\(R\)</span></em> <span class="arithmatex">\(\Longleftrightarrow (s_1, \dots, s_n) \in R\)</span></li>
+</ul>
+</li>
+<li>
+<p>A <strong>one-place relation</strong> on a set <span class="arithmatex">\(S\)</span> is a <strong>predicate</strong> on <span class="arithmatex">\(S\)</span>.</p>
+<ul>
+<li><span class="arithmatex">\(P\)</span> is true for an element <span class="arithmatex">\(s \in S \Longleftrightarrow s \in P\)</span>.</li>
+<li>Often written as <span class="arithmatex">\(P(s)\)</span> where <span class="arithmatex">\(P \colon S \to \{ \top, \bot \}\)</span>.</li>
+</ul>
+</li>
+<li>
+<p>A <strong>two-place relation</strong> <span class="arithmatex">\(R\)</span> on a two sets <span class="arithmatex">\(S\)</span> and <span class="arithmatex">\(T\)</span> is a
+  <strong>binary relation</strong>.</p>
+<ul>
+<li>Often written <span class="arithmatex">\(s\ R\ t\)</span> instead of <span class="arithmatex">\((s, t) \in R\)</span> for elements
+  <span class="arithmatex">\(s \in S\)</span> and <span class="arithmatex">\(t \in T\)</span>.</li>
+<li>If <span class="arithmatex">\(S = U \land T = U\)</span>, <span class="arithmatex">\(R\)</span> is a binary relation on <span class="arithmatex">\(U\)</span>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="domain-and-range">Domain and range<a class="headerlink" href="#domain-and-range" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>The <strong>domain</strong> <span class="arithmatex">\(dom(R)\)</span> of relation <span class="arithmatex">\(R\)</span> on sets <span class="arithmatex">\(S\)</span> and <span class="arithmatex">\(T\)</span>
+  is</p>
+<div class="arithmatex">\[
+\{ s \in S \mid \exists t \in T \colon (s, t) \in R \}
+\]</div>
+</li>
+<li>
+<p>The <strong>range</strong> <span class="arithmatex">\(range(R)\)</span> of relation <span class="arithmatex">\(R\)</span> on sets <span class="arithmatex">\(S\)</span> and <span class="arithmatex">\(T\)</span>
+  is</p>
+<div class="arithmatex">\[
+\{ t \in T \mid \exists s \in S \colon (s, t) \in R \}
+\]</div>
+</li>
+</ul>
+<h2 id="partial-function-and-total-function">Partial function and total function<a class="headerlink" href="#partial-function-and-total-function" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>The relation <span class="arithmatex">\(R\)</span> on sets <span class="arithmatex">\(S\)</span> and <span class="arithmatex">\(T\)</span> is a <strong>partial function</strong>
+  from <span class="arithmatex">\(S\)</span> to <span class="arithmatex">\(T\)</span> iff</p>
+<div class="arithmatex">\[
+\forall s \in S, t_1, t_2 \in T \colon (s, t_1) \in R \land (s, t_2) \in R
+    \rightarrow t_1 = t_2
+\]</div>
+</li>
+<li>
+<p>Iff <span class="arithmatex">\(dom(R) = S\)</span> in addition, <span class="arithmatex">\(R\)</span> is a <strong>total function</strong>
+  (or simply function) from <span class="arithmatex">\(S\)</span> to <span class="arithmatex">\(T\)</span>.</p>
+</li>
+</ul>
+<h2 id="defined-and-undefined">Defined and undefined<a class="headerlink" href="#defined-and-undefined" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>For the <strong>partial function</strong> <span class="arithmatex">\(R\)</span> from <span class="arithmatex">\(S\)</span> to <span class="arithmatex">\(T\)</span>, <span class="arithmatex">\(R\)</span> is
+  <strong>defined</strong> on argument <span class="arithmatex">\(s \in S\)</span> iff <span class="arithmatex">\(s \in dom(R)\)</span>, and
+  <strong>undefined</strong> otherwise.</p>
+<ul>
+<li><span class="arithmatex">\(f(x)\uparrow\)</span> or <span class="arithmatex">\(f(x) = \uparrow\)</span> means <span class="arithmatex">\(f\)</span> is <strong>undefined</strong> on input
+  <span class="arithmatex">\(x\)</span>; and</li>
+<li><span class="arithmatex">\(f(x)\downarrow\)</span> means <span class="arithmatex">\(f\)</span> is <strong>defined</strong> on input <span class="arithmatex">\(x\)</span>.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>It is important to distinguish between <strong>undefined</strong> versus
+<strong>failure</strong>. Some functions may <strong>fail</strong> for certain inputs, which is a legit
+and observable result, versus <strong>divergence</strong>.</p>
+<p>A function that can fail can be either partial (i.e. can also diverge) or
+total (either return a result or fail explicitly). It is written
+<span class="arithmatex">\(f(x) = fail\)</span> when <span class="arithmatex">\(f\)</span> returns a failure result on input <span class="arithmatex">\(x\)</span>.</p>
+<p>A function from <span class="arithmatex">\(S\)</span> to <span class="arithmatex">\(T\)</span> that may fail is really a function from
+<span class="arithmatex">\(S\)</span> to <span class="arithmatex">\(T \cup \{ \text{fail} \}\)</span>, where <span class="arithmatex">\(\text{fail}\)</span> is NOT an element
+of <span class="arithmatex">\(T\)</span>. <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+</blockquote>
+<h2 id="perservance-of-predicate">Perservance of predicate<a class="headerlink" href="#perservance-of-predicate" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Given binary relation <span class="arithmatex">\(R\)</span> on set <span class="arithmatex">\(S\)</span> and predicate <span class="arithmatex">\(P\)</span> on <span class="arithmatex">\(S\)</span>,
+  <span class="arithmatex">\(P\)</span> is <strong>preserved by</strong> <span class="arithmatex">\(R\)</span> iff</p>
+<div class="arithmatex">\[
+\forall s, s' \in S \colon (s, s') \in R \land P(s) \to P(s')
+\]</div>
+</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>There <em>may be</em> optimization tricks such as <code>Option&lt;NonZeroU32&gt;</code>
+ that make use of the invariant of <code>NonZeroU32</code> that it can never be <code>0</code>
+ to use that special value to indicate the <code>Option</code> is <code>None</code>. This is sound
+ <em>precisely</em> because the cardinality of <code>Option&lt;NonZeroU32&gt;</code> matches the
+ cardinality of <code>u32</code>. Here, <code>0u32</code> is NOT an element of <code>NonZeroU32</code>!&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../" title="Home" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../ordered-sets/notes/" title="Notes" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Notes
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

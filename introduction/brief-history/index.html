@@ -1,0 +1,980 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Brief History - Notes on Types and Programming Languages</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.6a5ad368.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#02a6f2">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="light-blue" data-md-color-accent="light-blue">
+  
+    
+      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#brief-history" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-announce">
+          <div class="md-announce__inner md-grid md-typeset">
+            
+    These notes are still under heavy development!
+
+          </div>
+        </aside>
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-header-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Notes on Types and Programming Languages
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Brief History
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../math-preliminaries/" class="md-tabs__link">
+          Math Preliminaries
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/type-systems-logics/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../references/" class="md-tabs__link">
+          References
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Notes on Types and Programming Languages
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon"></span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-nav__link">
+      Notes on Types and Programming Languages
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Introduction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../types-in-cs/" title="Type Systems in Computer Science" class="md-nav__link">
+      Type Systems in Computer Science
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Brief History" class="md-nav__link md-nav__link--active">
+      Brief History
+    </a>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../type-systems-good-for/" title="What Type Systems are Good For" class="md-nav__link">
+      What Type Systems are Good For
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../type-systems-language-design/" title="Type Systems and Language Design" class="md-nav__link">
+      Type Systems and Language Design
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Math Preliminaries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Math Preliminaries" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Math Preliminaries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/sets-functions-relations/" title="Sets, Functions and Relations" class="md-nav__link">
+      Sets, Functions and Relations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Ordered Sets
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ordered Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Ordered Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/ordered-sets/notes/" title="Notes" class="md-nav__link">
+      Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/ordered-sets/exercises/" title="Exercises" class="md-nav__link">
+      Exercises
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Resources
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Resources" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/type-systems-logics/" title="Type Systems and Logics" class="md-nav__link">
+      Type Systems and Logics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      References
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="References" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/" title="References" class="md-nav__link">
+      References
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="brief-history">Brief History<a class="headerlink" href="#brief-history" title="Permanent link">&para;</a></h1>
+<p>This list is very incomplete, and very outdated. But these are some of the very foundational
+papers of the modern-day type system studies. This table is taken from TaPL with modifications to
+add a few more important papers in more recent periods.</p>
+<table>
+<thead>
+<tr>
+<th>Time Period</th>
+<th>Topic</th>
+<th>Author/Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1870s</td>
+<td>Formal logic</td>
+<td>Frege (1879)</td>
+</tr>
+<tr>
+<td>1900s</td>
+<td>Formalization of mathematics</td>
+<td>Whitehead and Russel (1910)</td>
+</tr>
+<tr>
+<td>1930s</td>
+<td>Untyped lambda calculus</td>
+<td>Church (1941)</td>
+</tr>
+<tr>
+<td>1940s</td>
+<td>Simply-typed Lambda-Calculus</td>
+<td>Church(1940); Curry and Feys (1958)</td>
+</tr>
+<tr>
+<td>1950s</td>
+<td>Fortran</td>
+<td>Backus (1981)</td>
+</tr>
+<tr>
+<td></td>
+<td>Algol-60</td>
+<td>Naur et al. (1963)</td>
+</tr>
+<tr>
+<td>1960s</td>
+<td>Automath</td>
+<td>de Bruijin (1980)</td>
+</tr>
+<tr>
+<td></td>
+<td>Simula</td>
+<td>Birtwistle et al. (1970)</td>
+</tr>
+<tr>
+<td></td>
+<td>Curry-Howard correspondence</td>
+<td>Howard (1980)</td>
+</tr>
+<tr>
+<td></td>
+<td>Algol-68</td>
+<td>van Wijingaarden et al. (1975)</td>
+</tr>
+<tr>
+<td>1970s</td>
+<td>Pascal</td>
+<td>Wirth (1971)</td>
+</tr>
+<tr>
+<td></td>
+<td>Martin-Löf type theory</td>
+<td>Martin-Löf (1973, 1982)</td>
+</tr>
+<tr>
+<td></td>
+<td>System F, \(F^\omega\)</td>
+<td>Girard (1972)</td>
+</tr>
+<tr>
+<td></td>
+<td>Polymorphic Lambda-Calculus</td>
+<td>Reynolds (1974)</td>
+</tr>
+<tr>
+<td></td>
+<td>CLU</td>
+<td>Liskov et al. (1981)</td>
+</tr>
+<tr>
+<td></td>
+<td>Polymorphic Type Inference</td>
+<td>Milner (1978), Damas and Milner (1982)</td>
+</tr>
+<tr>
+<td></td>
+<td>ML</td>
+<td>Gordon, Milner and Wadsworth (1979)</td>
+</tr>
+<tr>
+<td></td>
+<td>Intersection Types</td>
+<td>Coppo and Dezani (1978); Coppo, Dezani and Sallé (1979); Pottinger (1980)</td>
+</tr>
+<tr>
+<td>1980s</td>
+<td>NuPRL</td>
+<td>Constable et al. (1986)</td>
+</tr>
+<tr>
+<td></td>
+<td>Temporal logic verification</td>
+<td>Clarke, Emerson, Sistla (1986)</td>
+</tr>
+<tr>
+<td></td>
+<td>Subtyping</td>
+<td>Reynolds (1980); Cardelli (1984); Mitchell (1984)</td>
+</tr>
+<tr>
+<td></td>
+<td>Coq</td>
+<td>Coquand, Huet (1991)</td>
+</tr>
+<tr>
+<td></td>
+<td>ADTs as Existential Types</td>
+<td>Mitchell and Plotkin (1988)</td>
+</tr>
+<tr>
+<td></td>
+<td>Calculus of Constructions</td>
+<td>Coquand (1985); Coquand and Huet (1988)</td>
+</tr>
+<tr>
+<td></td>
+<td>Linear Logic</td>
+<td>Girard (1987); Girard et al. (1989)</td>
+</tr>
+<tr>
+<td></td>
+<td>Bounded Quantification</td>
+<td>Cardelli and Wegner (1985); Curien and Ghelli (1992); Cardelli et al. (1994)</td>
+</tr>
+<tr>
+<td></td>
+<td>Edinburgh logical framework</td>
+<td>Harper, Honsell and Plotkin (1992)</td>
+</tr>
+<tr>
+<td></td>
+<td>Forsythe</td>
+<td>Reynolds (1988)</td>
+</tr>
+<tr>
+<td></td>
+<td>Pure type systems</td>
+<td>Terlouw (1989); Berardi (1988); Barendregt (1991)</td>
+</tr>
+<tr>
+<td></td>
+<td>Dependent types and modularity</td>
+<td>Burstall and Lampson (1984); MacQueen (1986)</td>
+</tr>
+<tr>
+<td></td>
+<td>Quest</td>
+<td>Cardelli (1991);</td>
+</tr>
+<tr>
+<td></td>
+<td>Effect systems</td>
+<td>Gifford et al. (1987); Talpin and Jouvelot (1992)</td>
+</tr>
+<tr>
+<td></td>
+<td>Row variables and extensible records</td>
+<td>Wand (1987); Remy (1989); Cardelli and Mitchell (1991)</td>
+</tr>
+<tr>
+<td>1990s</td>
+<td>Higher-order subtyping</td>
+<td>Cardelli (1990); Cardellli and Longo (1991)</td>
+</tr>
+<tr>
+<td></td>
+<td>Coq</td>
+<td>Paulin (1991)</td>
+</tr>
+<tr>
+<td></td>
+<td>Temporal logic for reactive/concurrent systems</td>
+<td>Manna and Pnueli (1992)</td>
+</tr>
+<tr>
+<td></td>
+<td>Refinement types for ML</td>
+<td>Freeman (1991)</td>
+</tr>
+<tr>
+<td></td>
+<td>Temporal logic</td>
+<td>Alur (1994)</td>
+</tr>
+<tr>
+<td></td>
+<td>Typed intermediate languages</td>
+<td>Tarditi, Morrisett, et al. (1996)</td>
+</tr>
+<tr>
+<td></td>
+<td>Object calculus</td>
+<td>Abadi and Cardelli (1996)</td>
+</tr>
+<tr>
+<td></td>
+<td>Translucent types and modularity</td>
+<td>Harper and Lillibridge (1996); Leroy (1994)</td>
+</tr>
+<tr>
+<td></td>
+<td>Typed assembly lanugage</td>
+<td>Morrisett et al. (1998)</td>
+</tr>
+<tr>
+<td>2000s</td>
+<td>Separation logic</td>
+<td>Reynolds (2002)</td>
+</tr>
+<tr>
+<td></td>
+<td>Generalized algebraic data types</td>
+<td>Cheney and Hinze (2003); Xi, Chen and Chen (2003); Sheard and Pasalic (2004)</td>
+</tr>
+<tr>
+<td></td>
+<td>Higher-order modules</td>
+<td>Dreyer (2003)</td>
+</tr>
+<tr>
+<td></td>
+<td>Traits</td>
+<td>Schärli et al. (2003)</td>
+</tr>
+<tr>
+<td></td>
+<td>Arbitrary rank types</td>
+<td>Jones (2005)</td>
+</tr>
+<tr>
+<td></td>
+<td>Agda</td>
+<td>Norell (2007)</td>
+</tr>
+<tr>
+<td></td>
+<td>Gradual typing</td>
+<td>Siek and Taha (2006)</td>
+</tr>
+<tr>
+<td></td>
+<td>Concurrent separation logic</td>
+<td>Brookes (2007)</td>
+</tr>
+<tr>
+<td></td>
+<td>Typestate-orientated programming</td>
+<td>Aldrich (2009)</td>
+</tr>
+<tr>
+<td>2010s</td>
+<td>Refinement types for Haskell</td>
+<td>Vazou (2014)</td>
+</tr>
+<tr>
+<td></td>
+<td>Homotopy type theory</td>
+<td>Univalent Foundations (2013)</td>
+</tr>
+<tr>
+<td></td>
+<td>Semantic typing</td>
+<td>Ralf Jung et al. (2018)</td>
+</tr>
+<tr>
+<td></td>
+<td>Idris2</td>
+<td>Brady (2018)</td>
+</tr>
+<tr>
+<td></td>
+<td>Cartesian cubical type theory</td>
+<td>Angiuli (2018)</td>
+</tr>
+</tbody>
+</table>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../types-in-cs/" title="Type Systems in Computer Science" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Type Systems in Computer Science
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../type-systems-good-for/" title="What Type Systems are Good For" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                What Type Systems are Good For
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

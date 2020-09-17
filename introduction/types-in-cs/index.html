@@ -1,0 +1,975 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Type Systems in Computer Science - Notes on Types and Programming Languages</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.6a5ad368.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#02a6f2">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="preference" data-md-color-primary="light-blue" data-md-color-accent="light-blue">
+  
+    
+      <script>matchMedia("(prefers-color-scheme: dark)").matches&&document.body.setAttribute("data-md-color-scheme","slate")</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#types-in-computer-science" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-announce">
+          <div class="md-announce__inner md-grid md-typeset">
+            
+    These notes are still under heavy development!
+
+          </div>
+        </aside>
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-header-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Notes on Types and Programming Languages
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Type Systems in Computer Science
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." class="md-tabs__link">
+          Home
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../preface/" class="md-tabs__link md-tabs__link--active">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../math-preliminaries/" class="md-tabs__link">
+          Math Preliminaries
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../resources/type-systems-logics/" class="md-tabs__link">
+          Resources
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../references/" class="md-tabs__link">
+          References
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-nav__button md-logo" aria-label="Notes on Types and Programming Languages">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Notes on Types and Programming Languages
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Home
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Home" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon"></span>
+        Home
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Notes on Types and Programming Languages" class="md-nav__link">
+      Notes on Types and Programming Languages
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Introduction
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../preface/" title="Preface" class="md-nav__link">
+      Preface
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Type Systems in Computer Science
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Type Systems in Computer Science" class="md-nav__link md-nav__link--active">
+      Type Systems in Computer Science
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#types-in-computer-science" class="md-nav__link">
+    Types in Computer Science
+  </a>
+  
+    <nav class="md-nav" aria-label="Types in Computer Science">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#possible-definition-of-a-type-system" class="md-nav__link">
+    Possible Definition of a "Type System"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-necessary-trade-off-between-soundness-and-completeness" class="md-nav__link">
+    A Necessary Trade-off between Soundness and Completeness
+  </a>
+  
+    <nav class="md-nav" aria-label="A Necessary Trade-off between Soundness and Completeness">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#voluntary-unsoundness-an-escape-hatch" class="md-nav__link">
+    Voluntary Unsoundness: An Escape Hatch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#working-together-automatic-systems-with-hints-from-the-programmer" class="md-nav__link">
+    Working Together: Automatic Systems with Hints from the Programmer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efficiency-of-type-systems" class="md-nav__link">
+    Efficiency of Type Systems
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branches-of-the-study-of-type-systems" class="md-nav__link">
+    Branches of the Study of Type Systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../brief-history/" title="Brief History" class="md-nav__link">
+      Brief History
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../type-systems-good-for/" title="What Type Systems are Good For" class="md-nav__link">
+      What Type Systems are Good For
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../type-systems-language-design/" title="Type Systems and Language Design" class="md-nav__link">
+      Type Systems and Language Design
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Math Preliminaries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Math Preliminaries" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Math Preliminaries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/sets-functions-relations/" title="Sets, Functions and Relations" class="md-nav__link">
+      Sets, Functions and Relations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Ordered Sets
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ordered Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Ordered Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/ordered-sets/notes/" title="Notes" class="md-nav__link">
+      Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../math-preliminaries/ordered-sets/exercises/" title="Exercises" class="md-nav__link">
+      Exercises
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Resources
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Resources" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Resources
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/type-systems-logics/" title="Type Systems and Logics" class="md-nav__link">
+      Type Systems and Logics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../resources/rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      References
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="References" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/" title="References" class="md-nav__link">
+      References
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#types-in-computer-science" class="md-nav__link">
+    Types in Computer Science
+  </a>
+  
+    <nav class="md-nav" aria-label="Types in Computer Science">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#possible-definition-of-a-type-system" class="md-nav__link">
+    Possible Definition of a "Type System"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-necessary-trade-off-between-soundness-and-completeness" class="md-nav__link">
+    A Necessary Trade-off between Soundness and Completeness
+  </a>
+  
+    <nav class="md-nav" aria-label="A Necessary Trade-off between Soundness and Completeness">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#voluntary-unsoundness-an-escape-hatch" class="md-nav__link">
+    Voluntary Unsoundness: An Escape Hatch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#working-together-automatic-systems-with-hints-from-the-programmer" class="md-nav__link">
+    Working Together: Automatic Systems with Hints from the Programmer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efficiency-of-type-systems" class="md-nav__link">
+    Efficiency of Type Systems
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branches-of-the-study-of-type-systems" class="md-nav__link">
+    Branches of the Study of Type Systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Type Systems in Computer Science</h1>
+                
+                <h2 id="types-in-computer-science">Types in Computer Science<a class="headerlink" href="#types-in-computer-science" title="Permanent link">&para;</a></h2>
+<p>Software engineering employs a wide range of <strong>formal methods</strong> to check that
+some system behaviours <em>correctly</em> when compared against a predefined set of
+<em>specifications</em>.</p>
+<div class="highlight"><pre><span></span><code>                [ system ]
+                     |
+                     v
+            &lt; formal method(s) &gt;  &lt;- [ specification ]
+                     |
+                     v
+ { is system correct w.r.t. specification? }
+        |                       |
+        v                       v
+     { yes }                  { no }
+</code></pre></div>
+
+<p>But typically, there exists a trade-off between <em>generality</em> (how <em>expressive</em>
+the verfication system is) and <em>usability</em> (how easy it is for the programmer to
+use the system), among other aspects such as time and space complexity.</p>
+<div class="highlight"><pre><span></span><code>     [Spectrum of Generality and Expressiveness of Formal Methods]
+
+More general/powerful                              Less general/powerful
+More cumbersome                                        More light-weight
+Higher time/space complexity                                Less complex
+Requires more markup                                Less markup required
+
+&lt;----------------------------------------------------------------------&gt;
+
+Hoare logic                                               Model checkers
+Algebraic verification languages                     Run-time monitoring
+Modal logics                                                Type systems
+Denotational semantics
+</code></pre></div>
+
+<p><strong>Type systems</strong> is one of such <em>lightweight formal method</em> for checking the
+system against a specification automatically.</p>
+<h3 id="possible-definition-of-a-type-system">Possible Definition of a "Type System"<a class="headerlink" href="#possible-definition-of-a-type-system" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>A type system is a tractable syntactic method for proving the absence of
+certain program behaviors by classifying phrases according to the kinds of
+values they compute.</p>
+</blockquote>
+<ul>
+<li>Focuses on <em>programs</em>.</li>
+<li><em>Classification</em> of syntactical phrases (terms); computing a
+  <em>static approximation</em> to the run-time behaviour of terms within a program.</li>
+</ul>
+<p>Since type systems are <em>static</em> (i.e. type information generated at
+compile-time, even for supposedly <em>dynamically-checked</em> or <em>dynamically-typed</em>
+languages where heap allocations are given <em>type tags</em> to do the type-checking
+at run-time; but this type tag information is still generated at compile-time).</p>
+<h3 id="a-necessary-trade-off-between-soundness-and-completeness">A Necessary Trade-off between Soundness and Completeness<a class="headerlink" href="#a-necessary-trade-off-between-soundness-and-completeness" title="Permanent link">&para;</a></h3>
+<p>Static type systems need to be <strong>conservative</strong> in order to remain <strong>sound</strong>:</p>
+<ul>
+<li>Not all ill-behaved programs can be rejected by the type system.</li>
+<li>Not all well-behaved programs can be accepted by the type system.</li>
+</ul>
+<p>Again, this is yet another case of Gödel's Incompleteness Theorem <a href="https://courses.maths.ox.ac.uk/node/view_material/2333">1</a> where we
+must pick <strong>soundness</strong> (consistency) over <strong>completeness</strong> because we never
+want to mistakenly accept a "badly-behaved" program as a well-typed program. Our
+programming languages are sufficiently complex that the well-typedness of an
+arbitrary program is an <em>undecidable problem</em>.</p>
+<blockquote>
+<p>Any consistent formal system <span class="arithmatex">\(F\)</span> within which a certain amount of elementary
+arithmetic can be carried out is incomplete; i.e., there are statements of the
+language of <span class="arithmatex">\(F\)</span> which can neither be proved nor disproved in <span class="arithmatex">\(F\)</span>.</p>
+</blockquote>
+<p>Due to the incompleteness, the type systems are also not able to catch every
+possible misbehaved program. The soundness w.r.t. bad behaviours only applies to
+the programs for which the typing rules of the type system can reject.</p>
+<p>The bad behaviours are typically eliminated by the type system through
+<em>run-time type errors</em>, but the <strong>safety</strong> (aka <strong>soundness</strong>) of the type
+system must be judged w.r.t. to its own set of <em>run-time errors</em>.</p>
+<h4 id="voluntary-unsoundness-an-escape-hatch">Voluntary Unsoundness: An Escape Hatch<a class="headerlink" href="#voluntary-unsoundness-an-escape-hatch" title="Permanent link">&para;</a></h4>
+<p>Interestingly, modern programming languages often do not necessarily have
+"sound" type systems in that precisely because some programs, despite behaving
+well at run-time, are not syntactically well-typed (i.e. the type systems are
+incomplete) – these type systems and programming languages provide "unsafe"
+mechanics to allow the programmer to write logic that the type system accepts as
+a true assumption but requires the programmer to manually enforce the required
+pre- and post-conditions and any required invariants.</p>
+<p>Examples:</p>
+<ul>
+<li>Java's <code>sun.misc.Unsafe</code> API.</li>
+<li>Rust's <code>unsafe</code> blocks and functions.</li>
+<li>C#'s <code>unsafe</code> keyword.</li>
+</ul>
+<p>The responsibility of checking the program's run-time behaviour when unsafe
+sections are used is then left to the programmer.</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// safe bits...</span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// unsafe block – need to manually upload invariants</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// SAFETY: `f` requires additional invariants to be enforced by the caller</span>
+<span class="k">unsafe</span><span class="w"> </span><span class="k">fn</span> <span class="nf">f</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+</code></pre></div>
+
+<blockquote>
+<p>"With great power comes great responsibility"</p>
+<p>– The Peter Parker Principle</p>
+</blockquote>
+<p>Some reseachers are exploring the possibility of elevating the soundness of a type system from
+just <em>syntactical soundness</em> up to <em>semantic soundness</em> – that is, a <em>synatictically sound</em> program
+is necessarily <em>semantically sound</em>, but a <em>semantically sound</em> program is not necessarily
+<em>synatically sound</em> (e.g. Rust <code>unsafe</code> sections). See the RustBelt project <a href="https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf">2</a>, <a href="https://www.ralfj.de/blog/2017/01/20/paris-rust-meetup.html">3</a>.</p>
+<h3 id="working-together-automatic-systems-with-hints-from-the-programmer">Working Together: Automatic Systems with Hints from the Programmer<a class="headerlink" href="#working-together-automatic-systems-with-hints-from-the-programmer" title="Permanent link">&para;</a></h3>
+<p>Type systems are automatic proof systems that typically also requires assistance from the
+programmer to suggest intent by providing <em>type annotations</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span>: <span class="kt">u8</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kt">u8</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">u8</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Here, the <code>: TypeName</code> and <code>-&gt; TypeName</code> are Rust's syntactical type annotations.</p>
+<p>Rust enforces these type annotations for public APIs to preserve backwards compatibility of
+crates.</p>
+<p>Usually, a programming language keeps these annotations as light as possible without hindering
+type-checking so programmers do not need to type as much. Although, types also serve as excellent
+<em>executable documentation</em> that cannot become out of date.</p>
+<h3 id="efficiency-of-type-systems">Efficiency of Type Systems<a class="headerlink" href="#efficiency-of-type-systems" title="Permanent link">&para;</a></h3>
+<p>It is <em>insufficient</em> for type systems to be <strong>sound</strong> – these type systems typically also need to
+be <strong>efficient</strong> so programmers don't have to suffer from long compile times, or in the case of
+dynamically type-checked languages, don't need to suffer from high run-time performance penalty.</p>
+<figure>
+    <img
+        src="https://imgs.xkcd.com/comics/compiling.png"
+        title="XKCD 303: Compiling"
+        alt="XKCD 303: Compiling"
+        loading="lazy"
+    />
+    <figcaption>XKCD 303: Compiling</figcaption>
+</figure>
+
+<h3 id="branches-of-the-study-of-type-systems">Branches of the Study of Type Systems<a class="headerlink" href="#branches-of-the-study-of-type-systems" title="Permanent link">&para;</a></h3>
+<p>Within CS, there are two branches of the study of type systems:</p>
+<ol>
+<li>More practical approach w.r.t. to programming languages.</li>
+<li>More abstract (connections between various "pure typed lambda-calculi" and logics).</li>
+</ol>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../preface/" title="Preface" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Preface
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../brief-history/" title="Brief History" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Brief History
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
