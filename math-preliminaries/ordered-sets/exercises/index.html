@@ -558,6 +558,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#q2" class="md-nav__link">
+    Q2
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -761,6 +768,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#q2" class="md-nav__link">
+    Q2
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -785,7 +799,7 @@
 R' \triangleq R \cup \{ (s, s) \mid s \in S \}
 \]</div>
 <p>That is, <span class="arithmatex">\(R'\)</span> contains all pairs in <span class="arithmatex">\(R\)</span> plus all pairs of the form
-<span class="arithmatex">\((s, s)\)</span>. Show <span class="arithmatex">\(R'\)</span> is reflexive closure of <span class="arithmatex">\(R\)</span>.</p>
+<span class="arithmatex">\((s, s)\)</span>. Show <span class="arithmatex">\(R'\)</span> is reflexive closure of <span class="arithmatex">\(R\)</span> [TaPL].</p>
 </blockquote>
 <p>Let <span class="arithmatex">\(\Delta_S \triangleq \{ (s, s) \mid s \in S \}\)</span> be the <strong>diagonal relation</strong>
 on <span class="arithmatex">\(S\)</span>, so that</p>
@@ -901,7 +915,7 @@ theorem.</p>
    theorem.</p>
 </li>
 <li>
-<p><span class="arithmatex">\(R'\)</span> is the <strong>smallest reflexive relation</strong> on <span class="arithmatex">\(S\)</span> that contains <span class="arithmatex">\(R\)</span> by
+<p><span class="arithmatex">\(R'\)</span> is the <strong>smallest</strong> reflexive relation on <span class="arithmatex">\(S\)</span> that contains <span class="arithmatex">\(R\)</span> by
    the <strong>Union is Smallest Superset</strong> theorem.</p>
 <details class="info"><summary>Union is Smallest Superset</summary><h3 id="theorem_2">Theorem<a class="headerlink" href="#theorem_2" title="Permanent link">&para;</a></h3>
 <p>Let <span class="arithmatex">\(S_1, S_2\)</span> be two sets. Then <span class="arithmatex">\(S_1 \cup S_2\)</span> is the <strong>smallest set</strong>
@@ -950,6 +964,86 @@ containing both <span class="arithmatex">\(S_1\)</span> and <span class="arithma
 \end{prooftree}
 \]</div>
 </details>
+</li>
+</ol>
+<h2 id="q2">Q2<a class="headerlink" href="#q2" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Here is a more constructive definition of the transitive closure of a relation
+<span class="arithmatex">\(R\)</span>. First, we define the following sequence of sets of pairs:</p>
+<div class="arithmatex">\[
+\begin{align}
+    R_0     &amp;= R \\
+    R_{i+1} &amp;= R_i \cup \{ (s, u) \mid
+        \exists t \in S \colon (s, t) \in R_i \land (t, u) \in R_i \}
+\end{align}
+\]</div>
+<p>That is, we construct each <span class="arithmatex">\(R_{i+1}\)</span> by adding to <span class="arithmatex">\(R_i\)</span> all the pairs that can
+be obtained by "one step of transitivity" from pairs already in <span class="arithmatex">\(R_i\)</span>.
+Finally, define the relation <span class="arithmatex">\(R^{+}\)</span> as the union of all <span class="arithmatex">\(R_i\)</span>s.</p>
+<div class="arithmatex">\[
+R^{+} = \bigcup_{i} R_i
+\]</div>
+<p>Show that this <span class="arithmatex">\(R^{+}\)</span> is really the transitive closure of <span class="arithmatex">\(R\)</span>.</p>
+</blockquote>
+<ol>
+<li>
+<p>At most one <em>relation</em> on <span class="arithmatex">\(S\)</span> can be the <strong>smallest transitive superset</strong>
+   of <span class="arithmatex">\(R\)</span>, by <strong>Smallest Element is Unique</strong> theorem.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(R^{+}\)</span> is a <strong>transitive relation</strong> containing <span class="arithmatex">\(R\)</span>, since by the principle
+   of one-step mathematical induction. We demonstrate the proof for the
+   proposition <span class="arithmatex">\(P(i)\)</span> that every <span class="arithmatex">\(R_i\)</span> (hence <span class="arithmatex">\(R^{+}\)</span>) contains <span class="arithmatex">\(R\)</span>, for
+   <span class="arithmatex">\(i \in \mathbb{N}\)</span>.</p>
+<ol>
+<li>
+<p>We first show that <span class="arithmatex">\(R^{+}\)</span> <strong>contains</strong> <span class="arithmatex">\(R\)</span>, which is trivial because by
+    definition:</p>
+<div class="arithmatex">\[
+R \subseteq R_0 \cup \bigcup_{i &gt; 0} R_i = R^{+}
+\]</div>
+</li>
+<li>
+<p>Then we need to show that the relation is in fact <strong>transitive</strong>. We use
+   complete induction to show this, for some <span class="arithmatex">\(j \in \mathbb{N}\)</span>, we show
+   that <span class="arithmatex">\(\forall i, j \in \mathbb{N} \colon R_i \subseteq R_j\)</span>.</p>
+<ul>
+<li>Assume <span class="arithmatex">\(\exists (a, b), (b, c) \in R^{+}\)</span>.</li>
+</ul>
+<div class="arithmatex">\[
+\begin{prooftree}
+    \AxiomC{$\exists (a, b), (b, c) \in R^{+}$}
+    \UnaryInfC{$\exists i \in \mathbb{N} \colon (a, b) \in R_i \land
+        \exists j \in \mathbb{N} \colon (b, c) \in R_j$}
+    \UnaryInfC{$(a, b), (b, c) \in R_{\max{(i, j)}}$}
+    \UnaryInfC{$(a, c) \in R_{\max{(i, j) + 1}} \subseteq R^{+}$}
+\end{prooftree}
+\]</div>
+</li>
+</ol>
+</li>
+<li>
+<p>To show that <span class="arithmatex">\(R^{+}\)</span> is the <strong>smallest</strong> transitive relation on <span class="arithmatex">\(S\)</span>. Let <span class="arithmatex">\(R'\)</span>
+   be some transitive relation on <span class="arithmatex">\(S\)</span> that contains <span class="arithmatex">\(R\)</span>, we need to show that
+   <span class="arithmatex">\(\forall n \in \mathbb{N} \colon R_n \subseteq R'\)</span> which means
+   <span class="arithmatex">\(R^{+} \subseteq R'\)</span>.</p>
+<ul>
+<li>
+<p>Trivially, <span class="arithmatex">\(R_0 = R \subseteq R'\)</span>.</p>
+</li>
+<li>
+<p>Assume that <span class="arithmatex">\(R_n \subseteq R'\)</span> and that <span class="arithmatex">\((x, z) \in R_{n+1}\)</span>:</p>
+<div class="arithmatex">\[
+R_n \subseteq R' \land (x, z) \in R_{n+1} \to
+    \exists y \colon (x, y) \in R_n \land (y, z) \in R_n
+\]</div>
+</li>
+<li>
+<p>Since <span class="arithmatex">\(R_n \subseteq R'\)</span> these pairs are too in <span class="arithmatex">\(R'\)</span>, and since <span class="arithmatex">\(R'\)</span> is
+  transitive we have <span class="arithmatex">\((x, z) \in R'\)</span>, meaning <span class="arithmatex">\(R^{+}\)</span> is in fact the
+  <strong>smallest transitive relation</strong> on <span class="arithmatex">\(S\)</span>.</p>
+</li>
+</ul>
 </li>
 </ol>
                 
