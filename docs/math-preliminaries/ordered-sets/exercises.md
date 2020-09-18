@@ -157,7 +157,7 @@ $$
    $\Delta_S$, by the **Relation Containing Diagonal Relation iff Reflexive**
    theorem.
 
-4. $R'$ is the **smallest reflexive relation** on $S$ that contains $R$ by
+4. $R'$ is the **smallest** reflexive relation on $S$ that contains $R$ by
    the **Union is Smallest Superset** theorem.
 
     ??? info "Union is Smallest Superset"
@@ -219,3 +219,75 @@ $$
                 \leftrightarrow (S_1 \cup S_2) \subseteq T$}
         \end{prooftree}
         $$
+
+## Q2
+
+> Here is a more constructive definition of the transitive closure of a relation
+> $R$. First, we define the following sequence of sets of pairs:
+>
+> $$
+> \begin{align}
+>     R_0     &= R \\
+>     R_{i+1} &= R_i \cup \{ (s, u) \mid
+>         \exists t \in S \colon (s, t) \in R_i \land (t, u) \in R_i \}
+> \end{align}
+> $$
+>
+> That is, we construct each $R_{i+1}$ by adding to $R_i$ all the pairs that can
+> be obtained by "one step of transitivity" from pairs already in $R_i$.
+> Finally, define the relation $R^{+}$ as the union of all $R_i$s.
+>
+> $$
+> R^{+} = \bigcup_{i} R_i
+> $$
+>
+> Show that this $R^{+}$ is really the transitive closure of $R$.
+
+1. At most one *relation* on $S$ can be the **smallest transitive superset**
+   of $R$, by **Smallest Element is Unique** theorem.
+
+2. $R^{+}$ is a **transitive relation** containing $R$, since by the principle
+   of one-step mathematical induction. We demonstrate the proof for the
+   proposition $P(i)$ that every $R_i$ (hence $R^{+}$) contains $R$, for
+   $i \in \mathbb{N}$.
+
+    1. We first show that $R^{+}$ **contains** $R$, which is trivial because by
+        definition:
+
+        $$
+        R \subseteq R_0 \cup \bigcup_{i > 0} R_i = R^{+}
+        $$
+
+    2. Then we need to show that the relation is in fact **transitive**. We use
+       complete induction to show this, for some $j \in \mathbb{N}$, we show
+       that $\forall i, j \in \mathbb{N} \colon R_i \subseteq R_j$.
+
+        - Assume $\exists (a, b), (b, c) \in R^{+}$.
+
+        $$
+        \begin{prooftree}
+            \AxiomC{$\exists (a, b), (b, c) \in R^{+}$}
+            \UnaryInfC{$\exists i \in \mathbb{N} \colon (a, b) \in R_i \land
+                \exists j \in \mathbb{N} \colon (b, c) \in R_j$}
+            \UnaryInfC{$(a, b), (b, c) \in R_{\max{(i, j)}}$}
+            \UnaryInfC{$(a, c) \in R_{\max{(i, j) + 1}} \subseteq R^{+}$}
+        \end{prooftree}
+        $$
+
+3. To show that $R^{+}$ is the **smallest** transitive relation on $S$. Let $R'$
+   be some transitive relation on $S$ that contains $R$, we need to show that
+   $\forall n \in \mathbb{N} \colon R_n \subseteq R'$ which means
+   $R^{+} \subseteq R'$.
+
+    - Trivially, $R_0 = R \subseteq R'$.
+
+    - Assume that $R_n \subseteq R'$ and that $(x, z) \in R_{n+1}$:
+
+        $$
+        R_n \subseteq R' \land (x, z) \in R_{n+1} \to
+            \exists y \colon (x, y) \in R_n \land (y, z) \in R_n
+        $$
+
+    - Since $R_n \subseteq R'$ these pairs are too in $R'$, and since $R'$ is
+      transitive we have $(x, z) \in R'$, meaning $R^{+}$ is in fact the
+      **smallest transitive relation** on $S$.
