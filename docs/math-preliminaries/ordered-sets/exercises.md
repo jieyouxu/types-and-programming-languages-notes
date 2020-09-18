@@ -9,7 +9,7 @@
 > $$
 >
 > That is, $R'$ contains all pairs in $R$ plus all pairs of the form
-> $(s, s)$. Show $R'$ is reflexive closure of $R$.
+> $(s, s)$. Show $R'$ is reflexive closure of $R$ [TaPL].
 
 Let $\Delta_S \triangleq \{ (s, s) \mid s \in S \}$ be the **diagonal relation**
 on $S$, so that
