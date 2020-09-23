@@ -291,3 +291,39 @@ $$
     - Since $R_n \subseteq R'$ these pairs are too in $R'$, and since $R'$ is
       transitive we have $(x, z) \in R'$, meaning $R^{+}$ is in fact the
       **smallest transitive relation** on $S$.
+
+## Q3
+
+> Suppose $R$ is a binary relation on a set $S$ and $P$ is a predicate on $S$
+> that is preserved by $R$. Show that $P$ is also preserved by $R^{\ast}$.
+
+To show that $P$ is also preserved by the **transitive and reflexive closure**
+$R^{\ast}$ of $R$.
+
+Recall that $R^{\ast}$ is the **transitive and reflexive closure** of $R$, and
+is constructed by
+
+$$
+\begin{align}
+    R^0      &= R \\
+    R^{n+1}  &= \{ (x, y) \in S \times S \mid
+        \exists z \colon (x, z) \in R^n \land (z, y) \in R^n \} \\
+    R^{\ast} &= \{ (x, x) \mid x \in S \} \cup \left( \bigcup_i R^i \right)
+\end{align}
+$$
+
+So, to show that $P$ is preserved by $R^{\ast}$, we need to show that
+$P$ is preserved by:
+
+1. The diagonal relation, that $P$ is preserved by $\{ (x, x) \mid x \in S \}$.
+2. The transitive closure, that $P$ is preserved by
+   $\left( \bigcup_i R^i \right)$.
+
+For (1), since the diagonal relation is trivially the identity relation, since
+$x = y$, if $P(x)$ holds then $P(y)$ certainly holds, and so $P$ is preserved.
+
+For (2), $P$ is preserved by $R^0$ since $R^0 = R$. Assume, for induction, that
+$P$ is preserved by $R^k$. For some pair $(x, y) \in R^{k+1}$, there must
+exist some $z$ such that $(x, z), (z, y) \in R_k$. By the induction hypothesis,
+$P(x)$ implies $P(z)$, which implies $P(y)$. Hence, $P$ is preserved by $R^i$
+for all $i \in \mathbb{N}$, and so $P$ is preserved by $\bigcup_i R^i$ as well.
