@@ -565,6 +565,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#q3" class="md-nav__link">
+    Q3
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -771,6 +778,13 @@
         <li class="md-nav__item">
   <a href="#q2" class="md-nav__link">
     Q2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#q3" class="md-nav__link">
+    Q3
   </a>
   
 </li>
@@ -1046,6 +1060,37 @@ R_n \subseteq R' \land (x, z) \in R_{n+1} \to
 </ul>
 </li>
 </ol>
+<h2 id="q3">Q3<a class="headerlink" href="#q3" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Suppose <span class="arithmatex">\(R\)</span> is a binary relation on a set <span class="arithmatex">\(S\)</span> and <span class="arithmatex">\(P\)</span> is a predicate on <span class="arithmatex">\(S\)</span>
+that is preserved by <span class="arithmatex">\(R\)</span>. Show that <span class="arithmatex">\(P\)</span> is also preserved by <span class="arithmatex">\(R^{\ast}\)</span>.</p>
+</blockquote>
+<p>To show that <span class="arithmatex">\(P\)</span> is also preserved by the <strong>transitive and reflexive closure</strong>
+<span class="arithmatex">\(R^{\ast}\)</span> of <span class="arithmatex">\(R\)</span>.</p>
+<p>Recall that <span class="arithmatex">\(R^{\ast}\)</span> is the <strong>transitive and reflexive closure</strong> of <span class="arithmatex">\(R\)</span>, and
+is constructed by</p>
+<div class="arithmatex">\[
+\begin{align}
+    R^0      &amp;= R \\
+    R^{n+1}  &amp;= \{ (x, y) \in S \times S \mid
+        \exists z \colon (x, z) \in R^n \land (z, y) \in R^n \} \\
+    R^{\ast} &amp;= \{ (x, x) \mid x \in S \} \cup \left( \bigcup_i R^i \right)
+\end{align}
+\]</div>
+<p>So, to show that <span class="arithmatex">\(P\)</span> is preserved by <span class="arithmatex">\(R^{\ast}\)</span>, we need to show that
+<span class="arithmatex">\(P\)</span> is preserved by:</p>
+<ol>
+<li>The diagonal relation, that <span class="arithmatex">\(P\)</span> is preserved by <span class="arithmatex">\(\{ (x, x) \mid x \in S \}\)</span>.</li>
+<li>The transitive closure, that <span class="arithmatex">\(P\)</span> is preserved by
+   <span class="arithmatex">\(\left( \bigcup_i R^i \right)\)</span>.</li>
+</ol>
+<p>For (1), since the diagonal relation is trivially the identity relation, since
+<span class="arithmatex">\(x = y\)</span>, if <span class="arithmatex">\(P(x)\)</span> holds then <span class="arithmatex">\(P(y)\)</span> certainly holds, and so <span class="arithmatex">\(P\)</span> is preserved.</p>
+<p>For (2), <span class="arithmatex">\(P\)</span> is preserved by <span class="arithmatex">\(R^0\)</span> since <span class="arithmatex">\(R^0 = R\)</span>. Assume, for induction, that
+<span class="arithmatex">\(P\)</span> is preserved by <span class="arithmatex">\(R^k\)</span>. For some pair <span class="arithmatex">\((x, y) \in R^{k+1}\)</span>, there must
+exist some <span class="arithmatex">\(z\)</span> such that <span class="arithmatex">\((x, z), (z, y) \in R_k\)</span>. By the induction hypothesis,
+<span class="arithmatex">\(P(x)\)</span> implies <span class="arithmatex">\(P(z)\)</span>, which implies <span class="arithmatex">\(P(y)\)</span>. Hence, <span class="arithmatex">\(P\)</span> is preserved by <span class="arithmatex">\(R^i\)</span>
+for all <span class="arithmatex">\(i \in \mathbb{N}\)</span>, and so <span class="arithmatex">\(P\)</span> is preserved by <span class="arithmatex">\(\bigcup_i R^i\)</span> as well.</p>
                 
               
               
