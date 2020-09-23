@@ -9,9 +9,11 @@
 - Cardinality of set $S$: $\lvert S \rvert$
 - Powerset of set $S$: $\mathcal{P}(S)$
 
-## Natural numbers
+## Natural Numbers
 
-- Set of natural numbers denoted by $\mathbb{N} = \{ 0, 1, \dots \}$
+- Set of natural numbers denoted by $\mathbb{N} = \{ 0, 1, \dots \}$.
+    - We denote the set of natural numbers excluding $0$ (positive natural
+      numbers) by $\mathbb{N}^{+} \triangleq \mathbb{N} \setminus \{0\}$.
 - A set is **countable** iff its elements can form an injective mapping into
   the elements of the natural numbers.
 - A set is **countably infinite** iff its elements can form a bijection to the
@@ -39,36 +41,44 @@
       $s \in S$ and $t \in T$.
     - If $S = U \land T = U$, $R$ is a binary relation on $U$.
 
-## Domain and range
+## Domain and Range
 
-- The **domain** $dom(R)$ of relation $R$ on sets $S$ and $T$
-  is
+### Domain
 
-    $$
+The **domain** $\mathrm{dom}(R)$ of relation $R$ on sets $S$ and $T$ is
+
+$$
+\mathrm{dom}(R) \triangleq
     \{ s \in S \mid \exists t \in T \colon (s, t) \in R \}
-    $$
+$$
 
-- The **range** $range(R)$ of relation $R$ on sets $S$ and $T$
-  is
+### Range
 
-    $$
+The **range** $\mathrm{range}(R)$ of relation $R$ on sets $S$ and $T$ is
+
+$$
+\mathrm{range}(R) \triangleq
     \{ t \in T \mid \exists s \in S \colon (s, t) \in R \}
-    $$
+$$
 
-## Partial function and total function
+## Partial Function and Total Function
 
-- The relation $R$ on sets $S$ and $T$ is a **partial function**
-  from $S$ to $T$ iff
+### Partial Function
 
-    $$
-    \forall s \in S, t_1, t_2 \in T \colon (s, t_1) \in R \land (s, t_2) \in R
-        \rightarrow t_1 = t_2
-    $$
+The relation $R$ on sets $S$ and $T$ is a **partial function** from $S$ to $T$
+iff
 
-- Iff $dom(R) = S$ in addition, $R$ is a **total function**
-  (or simply function) from $S$ to $T$.
+$$
+\forall s \in S, t_1, t_2 \in T \colon (s, t_1) \in R \land (s, t_2) \in R
+    \rightarrow t_1 = t_2
+$$
 
-## Defined and undefined
+### Total Function
+
+Iff $dom(R) = S$ in addition, $R$ is a **total function** (or simply function)
+from $S$ to $T$.
+
+## Defined and Undefined
 
 - For the **partial function** $R$ from $S$ to $T$, $R$ is
   **defined** on argument $s \in S$ iff $s \in dom(R)$, and
@@ -96,11 +106,11 @@
      *precisely* because the cardinality of `Option<NonZeroU32>` matches the
      cardinality of `u32`. Here, `0u32` is NOT an element of `NonZeroU32`!
 
-## Perservance of predicate
+## Perservance of Predicate
 
-- Given binary relation $R$ on set $S$ and predicate $P$ on $S$,
-  $P$ is **preserved by** $R$ iff
+Given binary relation $R$ on set $S$ and predicate $P$ on $S$, $P$ is
+**preserved by** $R$ iff
 
-    $$
-    \forall s, s' \in S \colon (s, s') \in R \land P(s) \to P(s')
-    $$
+$$
+\forall x, y \in S \colon \left( (x, y) \in R \land P(x) \right) \to P(y)
+$$
